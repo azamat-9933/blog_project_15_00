@@ -10,4 +10,5 @@ urlpatterns = [
     path('services/', services_view, name='services_url'),
     path('category/<str:slug>/', category_view, name='category_url'),
     path('results/', search_view, name='search_url'),
+    path('post/detail/<int:id>/', post_detail_view, name='post_detail_url'),
 ]

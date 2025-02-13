@@ -57,7 +57,16 @@ def search_view(request):
     return render(request, "search.html", context)
 
 
+def post_detail_view(request, id):
+    post = Post.objects.get(id=id)
+    post.views += 1
+    post.save()
 
+    context = {
+        'post': post
+    }
+
+    return render(request, "post_detail.html", context)
 
 
 
