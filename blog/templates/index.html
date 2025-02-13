@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block main %}
+<div class="container mt-3 mb-3">
+        <div class="d-flex justify-content-between">
+            <div class="col-3 mb-3">
+                <div class="list-group shadow">
+                    <a href="{% url 'index_url' %}" class="list-group-item list-group-item-action" aria-current="true">
+                        All Posts
+                    </a>
+                    {% for category in categories %}
+                    <a href="{% url 'category_url' category.slug %}"
+                       class="list-group-item
+                                       list-group-item-action
+                                       d-flex justify-content-between
+                                       align-items-center">
+                        {{ category.title }}
+                        <span class="badge text-bg-primary">{{ category.post_count }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-8 mb-3">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {% for post in posts %}
+                    <div class="col">
+                        <div class="card h-100 shadow">
+                            <div class="card-header">
+                                <h6>{{ post.category.title }}</h6>
+                            </div>
+                            <img src="{% if post.photo %}
+                                      {{ post.photo.url }}
+                                      {% else %}
+                                      {% static 'images/post.webp' %}
+                                      {% endif %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text">{{ post.description }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-body-secondary">{{ post.updated_at|date:"d-m-Y H:i:s" }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+{% endblock main %}

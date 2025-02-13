@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Category
+{% endblock title %}
+
+{% block slider %}
+<img src="https://seranking.com/blog/wp-content/uploads/2017/07/1920%D1%85400-3.png" alt="">
+{% endblock slider %}
+
+
+
+
+{% block main %}
+<div class="container mt-3 mb-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index_url' %}">Home</a></li>
+            <li class="breadcrumb-item active">Category</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ category.title }}</li>
+        </ol>
+    </nav>
+
+</div>
+
+<div class="container mb-3">
+    <div class="d-flex justify-content-around">
+        {% for for_category in categories %}
+        <a href="{% url 'category_url' for_category.slug %}"
+           class="btn btn-outline-success shadow {% if for_category.slug == category.slug %}active{% endif %}">
+            {{ for_category.title }}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container mb-3">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for post in posts %}
+        <div class="col">
+            <div class="card h-100 shadow">
+                <div class="card-header">
+                    <h6>{{ post.category.title }}</h6>
+                </div>
+                <img src="{% if post.photo %}
+                                      {{ post.photo.url }}
+                                      {% else %}
+                                      {% static 'images/post.webp' %}
+                                      {% endif %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.description }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-body-secondary">{{ post.updated_at|date:"d-m-Y H:i:s" }}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+<div class="d-flex justify-content-center mt-3">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+{% endblock main %}
