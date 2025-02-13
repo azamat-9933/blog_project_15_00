@@ -29,11 +29,13 @@ Search Results
                 <div class="card-header">
                     <h6>{{ post.category.title }}</h6>
                 </div>
-                <img src="{% if post.photo %}
+                <a href="{% url 'post_detail_url' post.id %}">
+                    <img src="{% if post.photo %}
                                       {{ post.photo.url }}
                                       {% else %}
                                       {% static 'images/post.webp' %}
                                       {% endif %}" class="card-img-top" alt="...">
+                </a>
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.description }}</p>
