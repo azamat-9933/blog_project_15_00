@@ -62,8 +62,11 @@ def post_detail_view(request, id):
     post.views += 1
     post.save()
 
+    populars = Post.objects.all().order_by('-views')[:3]
+
     context = {
-        'post': post
+        'post': post,
+        'populars': populars
     }
 
     return render(request, "post_detail.html", context)
