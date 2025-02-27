@@ -10,7 +10,7 @@ Home
 <div class="container mt-3 mb-3">
     <div class="d-flex justify-content-between">
         <div class="col-3 mb-3">
-            <div class="list-group shadow">
+            <div class="list-group shadow mb-4">
                 <a href="{% url 'index_url' %}" class="list-group-item list-group-item-action" aria-current="true">
                     All Posts
                 </a>
@@ -25,6 +25,23 @@ Home
                 </a>
                 {% endfor %}
             </div>
+
+            <div class="list-group shadow">
+                <a href="" class="list-group-item list-group-item-action" aria-current="true">
+                    The newest
+                </a>
+                <a href="" class="list-group-item list-group-item-action" aria-current="true">
+                    Most popular
+                </a>
+                <a href="" class="list-group-item list-group-item-action" aria-current="true">
+                    Most discussed
+                </a>
+                <a href="" class="list-group-item list-group-item-action" aria-current="true">
+                    Most favorite
+                </a>
+            </div>
+
+
         </div>
 
         <div class="col-8 mb-3">

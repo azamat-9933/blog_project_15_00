@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 
 # Create your views here.
 from blog.models import *
+from blog.forms import PostForm
 
 
 def index_view(request):
@@ -73,6 +75,23 @@ def post_detail_view(request, id):
 
 
 
+def add_post_view(request):
+    form = PostForm()
+
+    context = {
+        'form': form
+    }
+
+    return render(request, "add_post.html", context)
 
 
+def save_post_view(request):
+    form = PostForm(data=request.POST, files=request.FILES)
+
+    if form.is_valid():
+        post = form.save()
+
+        return redirect('post_detail_url', post.id)
+    else:
+        return redirect('add_post_url')
 
